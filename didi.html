@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bhai ka bulawa</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+        }
+
+        .didi {
+            position: absolute;
+            white-space: nowrap;
+            z-index: 1;
+        }
+
+        #kkrhoText {
+            position: absolute;
+            font-size: 50px;
+            font-weight: bold;
+            color: #333;
+            text-align: center;
+            display: none;
+            z-index: 2;
+        }
+    </style>
+</head>
+<body>
+    <div id="kkrhoText">kkrho?</div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const words =[
+                "didi", "দিদি", "姐姐", "hermana", "sœur", "schwester", "sorella", "자매",
+                
+                "दीदी", "姉妹", "αδελφή", "妹", "systir", "സഹോദരി", "irma", "சகோதரி" , "sister"
+            ];
+            let speedMultiplier = 3;
+            let sizeMultiplier = 1;
+            let wordsInterval;
+            const kkrhoText = document.getElementById("kkrhoText");
+
+            function getRandomItem(array) {
+                return array[Math.floor(Math.random() * array.length)];
+            }
+
+            function getRandomColor() {
+                return `rgb(${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)})`;
+            }
+
+            function getRandomFont() {
+                const fonts = ["Arial, sans-serif", "Helvetica, sans-serif", "Georgia, serif", "Times New Roman, serif", "Courier New, monospace"];
+                return getRandomItem(fonts);
+            }
+
+            function createWord() {
+                const word = getRandomItem(words);
+                const div = document.createElement("div");
+                div.className = "didi";
+                div.textContent = word;
+
+                const maxWidth = window.innerWidth - div.clientWidth;
+                const maxHeight = window.innerHeight - div.clientHeight;
+
+                const randomX = Math.random() * maxWidth;
+                const randomY = Math.random() * maxHeight;
+
+                const randomDirectionX = Math.random() > 0.5 ? 1 : -1;
+                const randomDirectionY = Math.random() > 0.5 ? 1 : -1;
+
+                div.style.left = `${randomX}px`;
+                div.style.top = `${randomY}px`;
+                div.style.color = getRandomColor();
+                div.style.fontFamily = getRandomFont();
+                div.style.fontSize = `${50 * sizeMultiplier}px`;
+
+                document.body.appendChild(div);
+
+                animateWord(div, randomDirectionX, randomDirectionY);
+            }
+
+            function animateWord(element, directionX, directionY) {
+                const speed = Math.random() * 2 + 1 * speedMultiplier;
+
+                function move() {
+                    const currentX = parseFloat(element.style.left);
+                    const currentY = parseFloat(element.style.top);
+
+                    const newX = currentX + speed * directionX;
+                    const newY = currentY + speed * directionY;
+
+                    if (newX > window.innerWidth - element.clientWidth || newX < 0) {
+                        directionX *= -1;
+                    }
+
+                    if (newY > window.innerHeight - element.clientHeight || newY < 0) {
+                        directionY *= -1;
+                    }
+
+                    element.style.left = `${newX}px`;
+                    element.style.top = `${newY}px`;
+
+                    requestAnimationFrame(move);
+                }
+
+                move();
+            }
+
+            function spawnInitialWords() {
+                for (let i = 0; i < 100; i++) {
+                    createWord();
+                }
+            }
+
+            function spawnWords() {
+                wordsInterval = setInterval(function () {
+                    createWord();
+                    speedMultiplier += 0.2;
+                    sizeMultiplier += 0.1;
+                }, 500);
+            }
+
+            function stopAnimations() {
+                clearInterval(wordsInterval);
+            }
+
+            function showKkrhoText() {
+                kkrhoText.style.display = "block";
+                kkrhoText.style.left = `${window.innerWidth / 2 - kkrhoText.clientWidth / 2}px`;
+                kkrhoText.style.top = `${window.innerHeight / 2 - kkrhoText.clientHeight / 2}px`;
+            }
+
+            document.body.addEventListener("click", function () {
+                stopAnimations();
+                const existingWords = document.querySelectorAll(".didi");
+                existingWords.forEach(word => word.remove());
+
+                showKkrhoText();
+            });
+
+            spawnInitialWords();
+            spawnWords();
+        });
+    </script>
+</body>
+</html>
