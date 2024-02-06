@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Sixtyfour&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: 'Sixtyfour', sans-serif;
+            background-size: cover;
+        }
+
+        ::selection {
+            color: white;
+            background: black;
+        }
+
+        .navbar {
+            height: 5vw;
+            align-items: center;
+            display: flex;
+
+        }
+
+        nav {
+            flex: 1;
+            text-align: right;
+        }
+
+        nav ul li {
+            list-style: none;
+            display: inline-block;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: black;
+            padding: 10px 15px;
+        }
+
+        .main {
+            padding-left: 8%;
+            padding-right: 8%;
+            padding-top: 4%;
+            box-sizing: border-box;
+            position: absolute;
+            background-image: linear-gradient(rgb(0, 0, 0, 0.4), rgb(0, 0, 0, 1)), url(background.jpg);
+
+        }
+
+        .page1 {
+            width: 100%;
+            height: 100vh;
+            position: relative;
+        }
+
+        .page1 h1 {
+            text-align: center;
+            margin-top: 30vh;
+            font-weight: 100;
+            font-size: 4vw;
+        }
+
+        .page1 p {
+            color: white;
+            font-size: larger;
+            text-align: right;
+            margin-top: 30%;
+            margin-left: 8%;
+            margin-right: 8%;
+            line-height: 40px;
+        }
+
+        .footer {
+            height: 100vh;
+            width: 100%;
+        }
+
+        .footer p {
+            margin-left: 8%;
+            margin-right: 8%;
+            box-sizing: border-box;
+            text-align: center;
+            color: white;
+            margin-top: 50%;
+            font-size: 1vw;
+            line-height: 40px;
+        }
+
+        a:hover {
+            color: white;
+            animation: hover 0.3s ease-in-out forwards;
+        }
+
+        @keyframes hover {
+            0% {
+                opacity: 0;
+            }
+
+            100% {
+                opacity: 1;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/locomotive-scroll@3.5.4/dist/locomotive-scroll.css">
+
+</head>
+
+<body>
+    <div class="main">
+        <div class="header">
+            <nav>
+                <ul>
+                    <li><a href="">HOME</a></li>
+                    <li><a href="">ABOUT</a></li>
+                    <li><a href="">SUPPORT</a></li>
+                </ul>
+            </nav>
+
+        </div>
+        <div class="page1">
+            <h1>
+                HELLO WORLD
+            </h1>
+            <p>
+                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Architecto dicta tenetur quod porro facilis
+                voluptate placeat? Possimus labore omnis veniam nostrum ipsum ratione adipisci ullam id sapiente,
+                quibusdam minima delectus.
+            </p>
+        </div>
+        <div class="footer">
+            <p>
+                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quos dolore culpa eos in perferendis aliquid
+                cum consequatur, illo soluta pariatur maxime repudiandae similique magnam accusantium ab, omnis eaque
+                aperiam iure. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Provident ex minus,
+                necessitatibus excepturi at facilis. Voluptas eum consequatur odit accusantium, necessitatibus
+                praesentium maiores quasi molestiae omnis vel fuga doloribus atque? Lorem ipsum dolor sit amet
+                consectetur, adipisicing elit. Ipsam iste ab, eveniet corporis blanditiis consequuntur deserunt!
+                Reiciendis numquam ex sapiente aliquid exercitationem laborum vitae minus at, quas aspernatur nesciunt
+                distinctio!
+            </p>
+        </div>
+    </div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/locomotive-scroll@3.5.4/dist/locomotive-scroll.js"></script>
+
+<script>
+    const locoScroll = new LocomotiveScroll({
+        el: document.querySelector(".main"),
+        smooth: true,
+    });
+</script>
+
+</html>
