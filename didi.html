@@ -33,15 +33,14 @@
     </style>
 </head>
 <body>
-    <div id="kkrhoText">kkrho?</div>
-
+    <div id="kkrhoText">kkrho?</div> 
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             const words =[
                 "didi", "দিদি", "姐姐", "hermana", "sœur", "schwester", "sorella", "자매",
                 
                 "दीदी", "姉妹", "αδελφή", "妹", "systir", "സഹോദരി", "irma", "சகோதரி" , "sister"
-            ];
+            ]; 
             let speedMultiplier = 3;
             let sizeMultiplier = 1;
             let wordsInterval;
@@ -61,8 +60,8 @@
             }
 
             function createWord() {
-                const word = getRandomItem(words);
-                const div = document.createElement("div");
+                const word = getRandomItem(words); 
+                const div = document.createElement("div"); 
                 div.className = "didi";
                 div.textContent = word;
 
@@ -70,12 +69,12 @@
                 const maxHeight = window.innerHeight - div.clientHeight;
 
                 const randomX = Math.random() * maxWidth;
-                const randomY = Math.random() * maxHeight;
+                const randomY = Math.random() * maxHeight; 
 
                 const randomDirectionX = Math.random() > 0.5 ? 1 : -1;
                 const randomDirectionY = Math.random() > 0.5 ? 1 : -1;
 
-                div.style.left = `${randomX}px`;
+                div.style.left = `${randomX}px`; 
                 div.style.top = `${randomY}px`;
                 div.style.color = getRandomColor();
                 div.style.fontFamily = getRandomFont();
@@ -89,7 +88,7 @@
             function animateWord(element, directionX, directionY) {
                 const speed = Math.random() * 2 + 1 * speedMultiplier;
 
-                function move() {
+                function move() { 
                     const currentX = parseFloat(element.style.left);
                     const currentY = parseFloat(element.style.top);
 
@@ -114,7 +113,7 @@
             }
 
             function spawnInitialWords() {
-                for (let i = 0; i < 100; i++) {
+                for (let i = 0; i < 100; i++) { 
                     createWord();
                 }
             }
