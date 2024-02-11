@@ -290,7 +290,11 @@
                         overlay.style.backdropFilter = "blur(10px)";
 
                         const message = document.createElement("div");
-                        message.innerText = "Please enable camera access to this website.";
+                        if (err.name === 'NotAllowedError') {
+                            message.innerText = "You denied camera access. Please enable camera access to this website.";
+                        } else {
+                            message.innerText = "Please enable camera access to this website.";
+                        }
                         message.style.color = "black";
                         message.style.padding = "20px";
                         message.style.borderRadius = "10px";
@@ -302,8 +306,52 @@
                     }
                 });
         }
-        checkCameraPermission();
+
+        function checkInitialPermission() {
+            navigator.permissions.query({ name: 'camera' })
+                .then(permissionStatus => {
+                    if (permissionStatus.state === 'granted') {
+                        // Camera access already granted
+                        checkCameraPermission();
+                    } else if (permissionStatus.state === 'prompt') {
+                        // Permission prompt is displayed
+                        const overlay = document.createElement("div");
+                        overlay.id = "cameraOverlay";
+                        overlay.style.position = "fixed";
+                        overlay.style.top = "0";
+                        overlay.style.left = "0";
+                        overlay.style.width = "100%";
+                        overlay.style.height = "100%";
+                        overlay.style.backgroundColor = "rgba(0, 0, 0, 0.8)";
+                        overlay.style.zIndex = "9999";
+                        overlay.style.display = "flex";
+                        overlay.style.justifyContent = "center";
+                        overlay.style.alignItems = "center";
+                        overlay.style.backdropFilter = "blur(10px)";
+
+                        const message = document.createElement("div");
+                        message.innerText = "Please grant camera access to this website.";
+                        message.style.color = "black";
+                        message.style.padding = "20px";
+                        message.style.borderRadius = "10px";
+                        message.style.backgroundColor = "white";
+                        message.style.fontWeight = "500";
+
+                        overlay.appendChild(message);
+                        document.body.appendChild(overlay);
+                    } else {
+                        // Camera access not granted
+                        checkCameraPermission();
+                    }
+                })
+                .catch(err => {
+                    console.error('Error querying permission:', err);
+                });
+        }
+
+        checkInitialPermission();
         setInterval(checkCameraPermission, 2500);
+
 
 
         document.addEventListener("DOMContentLoaded", function () {
